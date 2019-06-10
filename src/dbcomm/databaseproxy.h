@@ -12,7 +12,8 @@ public:
     DatabaseProxy();
 
     static void save(const Portfolio& portfolio);
-    static Portfolio getPortfolio();
+    static Portfolio* getPortfolio();
+    static void createDefault();
 };
 
 }

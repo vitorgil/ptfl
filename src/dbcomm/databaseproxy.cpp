@@ -31,20 +31,28 @@ void DatabaseProxy::save(const Portfolio& portfolio)
     jsondb::saveJson("portfolio.db", QJsonDocument(object));
 }
 
-Portfolio DatabaseProxy::getPortfolio()
+Portfolio* DatabaseProxy::getPortfolio()
 {
-    Portfolio p;
+    Portfolio* p = new Portfolio;
     auto doc = jsondb::readJson("portfolio.db");
     const auto& object = doc.object();
     for (auto it = object.constBegin(); it != object.constEnd(); ++it)
     {
         auto valueObject = it->toObject();
-        p.addTransaction(
+        p->addTransaction(
             valueObject["ticker"].toString(),
             valueObject["price"].toDouble(),
             valueObject["volume"].toString().toUInt(),
             QDateTime::fromString(valueObject["date"].toString()));
     }
     return p;
+}
+
+void DatabaseProxy::createDefault()
+{
+    Portfolio p;
+    p.addTransaction("NVDA", 123, 50, {});
+    p.addTransaction("AMAT", 40, 150, {});
+    save(p);
 }
 }

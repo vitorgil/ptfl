@@ -16,13 +16,13 @@ MainWindow::MainWindow(QWidget *parent) :
     QTabWidget* tabWidget = new QTabWidget();
     setCentralWidget(tabWidget);
 
-    mAccountsWidget = new AccountsWidget(this);
-    mAccountsWidget->initialize();
-    tabWidget->addTab(mAccountsWidget, "Accounts");
-
     mStocksTableWidget = new StocksTableWidget(this);
     mStocksTableWidget->initialize();
     tabWidget->addTab(mStocksTableWidget, "Portfolio");
+
+    mAccountsWidget = new AccountsWidget(this);
+    mAccountsWidget->initialize();
+    tabWidget->addTab(mAccountsWidget, "Accounts");
 }
 
 MainWindow::~MainWindow()
