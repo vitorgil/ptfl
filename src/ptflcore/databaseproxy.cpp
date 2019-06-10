@@ -1,6 +1,6 @@
 #include "databaseproxy.h"
 
-#include "io.h"
+#include "ptfldb/io.h"
 #include "portfolio.h"
 
 #include <QJsonObject>

@@ -1,43 +1,17 @@
 #include "portfolio.h"
 
+#include "prices/currentpricescontroller.h"
+
 namespace
 {
 std::function<void(double)> gCallback;
-
 }
 
 namespace ptfl
 {
-
-CurrentPricesController::CurrentPricesController(const AllPricesReceivedCallback& callback)
-    : mCallback(callback)
-{}
-
-double CurrentPricesController::getPrice(const QString& ticker) const
-{
-    return mCurrentPrices.value(ticker);
-}
-
-void CurrentPricesController::reset(size_t numberOfTickers)
-{
-    mNumberOfTickers = numberOfTickers;
-    mDone = false;
-}
-
-void CurrentPricesController::priceReceived(const QString& ticker, double price)
-{
-    mCurrentPrices[ticker] = price;
-
-    if (--mNumberOfTickers == 0)
-    {
-        mDone = true;
-        mCallback();
-    }
-}
-
 Portfolio::Portfolio()
 {
-    mCurrentPricesController = new CurrentPricesController([this]() { onAllPricesReceived(mTransactions); });
+    mCurrentPricesController = new prices::CurrentPricesController([this]() { onAllPricesReceived(mTransactions); });
 }
 
 void Portfolio::addTransaction(const QString& ticker, double price, unsigned int volume, const QDateTime& date)
@@ -74,7 +48,7 @@ void Portfolio::calculateCurrentValue(const prices::PriceUpdateCallback& callbac
     }
 }
 
-void Portfolio::onAllPricesReceived(const ptfl::Transactions& transactions)
+void Portfolio::onAllPricesReceived(const Transactions& transactions)
 {
     double value = 0.0;
     for (const auto& transaction : transactions)

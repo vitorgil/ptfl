@@ -7,8 +7,8 @@
 #include "utils/noneditabletablewidgetitem.h"
 #include "utils/noneditabletextfield.h"
 
-#include "dbcomm/databaseproxy.h"
-#include "dbcomm/portfolio.h"
+#include "ptflcore/databaseproxy.h"
+#include "ptflcore/portfolio.h"
 
 StocksTableWidget::StocksTableWidget(QWidget *parent)
     : QWidget(parent)

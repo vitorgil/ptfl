@@ -1,5 +1,4 @@
-#ifndef NONEDITABLETEXTFIELD_H
-#define NONEDITABLETEXTFIELD_H
+#pragma once
 
 #include <QLineEdit>
 
@@ -8,5 +7,3 @@ class NonEditableTextField : public QLineEdit
 public:
     NonEditableTextField(const QString& text, QWidget* parent = nullptr);
 };
-
-#endif // NONEDITABLETEXTFIELD_H

@@ -1,5 +1,7 @@
 add_library(prices SHARED
   pricesapi.cpp
+  currentpricescontroller.cpp
+  transaction.cpp
 )
 
 target_include_directories(prices INTERFACE ${CMAKE_SOURCE_DIR}/src)
